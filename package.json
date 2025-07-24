@@ -1,4 +1,23 @@
 {
+  "name": "tutoria_server",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/thomasrey99/TutorIA_server#readme",
+  "bugs": {
+    "url": "https://github.com/thomasrey99/TutorIA_server/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thomasrey99/TutorIA_server.git"
+  },
+  "license": "ISC",
+  "author": "thomasrey99",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
   "dependencies": {
     "@sequelize/postgres": "^7.0.0-alpha.46",
     "bcrypt": "^6.0.0",
@@ -7,6 +26,7 @@
     "express": "^5.1.0",
     "firebase-admin": "^13.4.0",
     "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.1",
     "multer": "^2.0.2",
     "node": "^20.19.4",
     "node-cron": "^4.2.1",
