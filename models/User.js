@@ -22,6 +22,10 @@ module.exports = (database) => {
                 allowNull: false,
                 unique: true,
             },
+            image: {
+                type: DataTypes.STRING,
+                allowNull: true,
+            },
             password: {
                 type: DataTypes.STRING,
                 allowNull: false,
