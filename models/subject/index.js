@@ -1,27 +1,17 @@
-const { Datatypes } = require('sequelize');
+const { DataTypes } = require('sequelize');
 
 module.exports = (database) => {
     database.define(
-        'User',
+        'Subject',
         {
             id: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
                 primaryKey: true
             },
-            email: {
-                type: DataTypes.STRING,
-                unique: true,
-                allowNull: false,
-                validate: { isEmail: true }
-            },
-            password: {
+            name: {
                 type: DataTypes.STRING,
                 allowNull: false
-            },
-            isSubscribed: {
-                type: DataTypes.BOOLEAN,
-                defaultValue: false
             }
         },
         {
