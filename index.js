@@ -10,7 +10,6 @@ const startServer = async () => {
     try {
         await database.authenticate();
         await database.sync({ alter: true });
-
         const tryListening = (port) => {
             server.listen(port, () => {
                 console.log(`Server listening on port ${port}`);

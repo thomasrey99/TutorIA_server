@@ -1,4 +1,4 @@
-const { registerUser } = require('../../controllers/user/userPost.controllers');
+const { registerUser, loginUser } = require('../../controllers/user/userPost.controllers');
 const buildResponse = require('../../utils/responseBuilder');
 
 const registerUserHandler = async (req, res) => {
@@ -23,6 +23,36 @@ const registerUserHandler = async (req, res) => {
     };
 };
 
+const loginUserHandler = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const { token, user } = await loginUser({ email, password });
+        return res.status(200).json(
+            buildResponse({
+                status: 200,
+                message: 'login success!',
+                data: {
+                    token,
+                    user: {
+                        id: user.id,
+                        email: user.email,
+                        role: user.role
+                    }
+                }
+            })
+        );
+    } catch (error) {
+        return res.status(401).json(
+            buildResponse({
+                status: 401,
+                error: true,
+                message: error.message
+            })
+        );
+    };
+};
+
 module.exports = {
-    registerUserHandler
+    registerUserHandler,
+    loginUserHandler
 };

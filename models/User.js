@@ -7,21 +7,44 @@ module.exports = (database) => {
             id: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
-                primaryKey: true
+                primaryKey: true,
+            },
+            name: {
+                type: DataTypes.STRING,
+                allowNull: true,
+            },
+            lastName: {
+                type: DataTypes.STRING,
+                allowNull: true,
             },
             email: {
                 type: DataTypes.STRING,
-                unique: true,
                 allowNull: false,
-                validate: { isEmail: true }
+                unique: true,
             },
             password: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
+            },
+            role: {
+                type: DataTypes.ENUM("client", "admin"),
+                defaultValue: "client",
+            },
+            phone: {
+                type: DataTypes.STRING,
+                allowNull: true,
+            },
+            address: {
+                type: DataTypes.STRING,
+                allowNull: true,
             },
             isSubscribed: {
                 type: DataTypes.BOOLEAN,
                 defaultValue: false
+            },
+            isActive: {
+                type: DataTypes.BOOLEAN,
+                defaultValue: true,
             }
         },
         {
