@@ -1,4 +1,4 @@
-const { updateProfile } = require("../../controllers/user/userPatch.controllers");
+const { updateProfile, changePassword } = require("../../controllers/user/userPatch.controllers");
 const buildResponse = require("../../utils/responseBuilder");
 
 const updateProfileHandler = async (req, res) => {
@@ -22,6 +22,34 @@ const updateProfileHandler = async (req, res) => {
     };
 };
 
+const changePasswordHandler = async (req, res) => {
+    try {
+        const { currentPassword, newPassword } = req.body;
+        const { id } = req.user;
+        const updatedUser = await changePassword({
+            userId:id,
+            currentPassword,
+            newPassword
+        });
+        return res.status(200).json(
+            buildResponse({
+                status: 200,
+                message: "password changed successfully",
+                data: updatedUser
+            })
+        );
+    } catch (error) {
+        return res.status(400).json(
+            buildResponse({
+                status: 400,
+                message: error.message,
+                error: true
+            })
+        );
+    };
+};
+
 module.exports = {
-    updateProfileHandler
+    updateProfileHandler,
+    changePasswordHandler
 };
