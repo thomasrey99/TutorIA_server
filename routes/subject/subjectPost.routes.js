@@ -3,6 +3,6 @@ const { createSubjectHandler } = require('../../handlers/subject/subjectPost.han
 
 const postSubjectRouter = Router();
 
-postSubjectRouter.post('/newSubject', createSubjectHandler);
+postSubjectRouter.post('/', createSubjectHandler);
 
 module.exports = postSubjectRouter;
