@@ -12,6 +12,10 @@ module.exports = (database) => {
             name: {
                 type: DataTypes.STRING,
                 allowNull: false
+            },
+            color: {
+                type: DataTypes.STRING,
+                allowNull: false
             }
         },
         {
@@ -19,5 +23,5 @@ module.exports = (database) => {
             timestamps: true,
             paranoid: true,
         }
-    )
-}
+    );
+};
