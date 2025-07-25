@@ -11,7 +11,7 @@ const getSubjectById = async (userId, subjectId) => {
             include: [StudyMaterial]
         }
     );
-    if (!subject) throw new Error('Subject not found');
+    if (!subject) throw new Error('Subject not found or does not belong to this user');
     return subject;
 };
 
