@@ -15,7 +15,7 @@ module.exports = (database) => {
             },
             color: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: true
             }
         },
         {
