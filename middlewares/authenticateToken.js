@@ -5,7 +5,7 @@ require('dotenv').config();
 const { JWT_SECRET } = process.env;
 
 const authenticateToken = async (req, res, next) => {
-    const token = req.headers['authorization'];
+    const token = req.cookies.token;
     if (!token) {
         return res.status(401).json(
             buildResponse({

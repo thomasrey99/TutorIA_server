@@ -26,7 +26,7 @@ const registerUser = async ({ email, password }) => {
 };
 
 const loginUser = async ({ email, password }) => {
-    if (!email && !password) throw new Error("Missing Email or password");
+    if (!email || !password) throw new Error("Missing Email or password");
 
     const user = await User.findOne({
         where: {

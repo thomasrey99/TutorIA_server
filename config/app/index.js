@@ -1,6 +1,8 @@
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
+const cookieParser = require('cookie-parser');
+
 const mainRouter = require("../../routes");
 
 const server = express();
@@ -17,7 +19,9 @@ server.use(
 
 server.use(morgan("dev"));
 server.use(express.json());
+server.use(cookieParser());
 
+//!Routes
 server.use(mainRouter);
 
 module.exports = server;

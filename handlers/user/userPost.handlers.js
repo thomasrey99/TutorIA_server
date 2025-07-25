@@ -27,18 +27,20 @@ const loginUserHandler = async (req, res) => {
     try {
         const { email, password } = req.body;
         const { token, user } = await loginUser({ email, password });
-        return res.status(200).json(
+        return res.status(200).cookie(
+            "token",
+            token,
+            {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === "production",
+                sameSite: "strict",
+                maxAge: 1000 * 60 * 60 * 24,
+            }
+        ).json(
             buildResponse({
                 status: 200,
                 message: 'login success!',
-                data: {
-                    token,
-                    user: {
-                        id: user.id,
-                        email: user.email,
-                        role: user.role
-                    }
-                }
+                data: user
             })
         );
     } catch (error) {
@@ -52,7 +54,32 @@ const loginUserHandler = async (req, res) => {
     };
 };
 
+const logOutUserHandler = async (req, res) => {
+    try {
+        res.clearCookie('token', {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict'
+        });
+        return res.status(200).json(
+            buildResponse({
+                status: 200,
+                message: "Logout Successfully"
+            })
+        );
+    } catch (error) {
+        return res.status(400).json(
+            buildResponse({
+                status: 400,
+                message: "Logout error",
+                error: true
+            })
+        );
+    };
+};
+
 module.exports = {
     registerUserHandler,
-    loginUserHandler
+    loginUserHandler,
+    logOutUserHandler
 };
