@@ -1,6 +1,6 @@
 const { Subject } = require('../../config/database');
 
-const updateSubject = async ({userId, subjectId, updatedData}) => {
+const updateSubject = async ({ userId, subjectId, updatedData }) => {
     if (!userId || !subjectId) throw new Error("userId or subjectId not provided");
     const subject = await Subject.findOne({
         where: {
