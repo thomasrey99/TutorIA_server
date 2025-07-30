@@ -1,20 +1,22 @@
-const { getMaterialById } = require("../../controllers/material/materialGet.controllers");
+const { updateMaterial } = require("../../controllers/material/materialPatch.controllers");
 const buildResponse = require("../../utils/responseBuilder");
 
-const getMaterialByIdHandler = async (req, res) => {
+const updateMaterialHandler = async (req, res) => {
     try {
         const { materialId } = req.params;
         const userId = req.user.id;
-        const material = await getMaterialById({
+        const updatedData = req.body;
+        const updatedMaterial = await updateMaterial({
+            userId,
             materialId,
-            userId
+            updatedData
         });
         return res.status(200).json(
             buildResponse(
                 {
                     status: 200,
-                    message: "Material successfully obtained",
-                    data: material
+                    message: "Material updated successfully",
+                    data: updatedMaterial
                 }
             )
         );
@@ -24,7 +26,7 @@ const getMaterialByIdHandler = async (req, res) => {
                 {
                     status: 400,
                     message: error.message,
-                    error: true
+                    error: true,
                 }
             )
         );
@@ -32,5 +34,5 @@ const getMaterialByIdHandler = async (req, res) => {
 };
 
 module.exports = {
-    getMaterialByIdHandler
+    updateMaterialHandler
 };

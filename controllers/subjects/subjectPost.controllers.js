@@ -1,6 +1,6 @@
 const { User } = require('../../config/database');
 
-const createSubject = async (userId, data) => {
+const createSubject = async ({ userId, data }) => {
     if (!data.name) throw new Error('Name subject required');
     const user = await User.findByPk(userId, {
         attributes: {
@@ -8,10 +8,13 @@ const createSubject = async (userId, data) => {
         }
     });
     if (!user) throw new Error("User not found");
-    const newSubject = await user.createSubject(data);
+    const newSubject = await user.createSubject({
+        ...data,
+        userId
+    });
     return newSubject;
 }
 
-module.exports={
+module.exports = {
     createSubject
 }

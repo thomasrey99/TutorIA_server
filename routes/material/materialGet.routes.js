@@ -1,9 +1,9 @@
 const { Router } = require('express');
-const { getMaterialsBySubjectHandler } = require('../../handlers/material/materialGet.handlers');
+const { getMaterialByIdHandler } = require('../../handlers/material/materialGet.handlers');
 
 const getMaterialsRouter = Router();
 
-getMaterialsRouter.get("/:subjectId", getMaterialsBySubjectHandler);
+getMaterialsRouter.get("/:materialId", getMaterialByIdHandler);
 
 module.exports = {
     getMaterialsRouter

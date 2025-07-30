@@ -3,10 +3,12 @@ const buildResponse = require("../../utils/responseBuilder");
 
 const createSubjectHandler = async (req, res) => {
     try {
-        const { id } = req.user;
+        const userId = req.user.id;
         const data = req.body;
-        console.log(id, data)
-        const newSubject = await createSubject(id, data);
+        const newSubject = await createSubject({
+            userId,
+            data
+        });
         return res.status(201).json(
             buildResponse({
                 status: 201,

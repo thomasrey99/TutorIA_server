@@ -12,7 +12,10 @@ const createMaterial = async ({ userId, subjectId, data }) => {
         }
     );
     if (!subject) throw new Error('Subject not found or does not belong to the user');
-    const newMaterial = subject.createMaterial(data);
+    const newMaterial = subject.createMaterial({
+        ...data,
+        userId
+    });
     return newMaterial;
 }
 

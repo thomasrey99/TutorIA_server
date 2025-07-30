@@ -1,21 +1,22 @@
 const { Material, Subject } = require('../../config/database');
 
-const getMaterialsBySubject = async ({ userId, subjectId }) => {
-    const subject = await Subject.findOne({
+const getMaterialById = async ({ materialId, userId }) => {
+    if (!materialId || !userId) throw new Error('Id not provided');
+    const material = await Material.findOne({
         where: {
-            id: subjectId,
-            userId
+            id: materialId,
+        },
+        include:{
+            model:Subject,
+            where:{
+                userId
+            }
         }
     });
-    if (!subject) throw new Error("Subject not found or does not belong to the user");
-    const materials = await Material.findAll({
-        where: {
-            subjectId
-        }
-    })
-    return materials;
+    if (!material) throw new Error('Material not found or access denied');
+    return material;
 };
 
 module.exports = {
-    getMaterialsBySubject
+    getMaterialById
 };
