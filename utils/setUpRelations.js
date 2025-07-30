@@ -1,5 +1,5 @@
 const setUpRelations = (models) => {
-    const { User, StudyMaterial, Subject } = models;
+    const { User, Material, Subject } = models;
     if (User && Subject) {
         User.hasMany(Subject, {
             foreignKey: "userId",
@@ -9,15 +9,24 @@ const setUpRelations = (models) => {
             foreignKey: "userId",
         });
     };
-    if (Subject && StudyMaterial) {
-        Subject.hasMany(StudyMaterial, {
+    if (Subject && Material) {
+        Subject.hasMany(Material, {
             foreignKey: "subjectId",
             onDelete: 'CASCADE'
         });
-        StudyMaterial.belongsTo(Subject, {
+        Material.belongsTo(Subject, {
             foreignKey: "subjectId",
         });
     };
+    if (User && Material) {
+        User.hasMany(Material, {
+            foreignKey: "userId",
+            onDelete: "CASCADE"
+        })
+        Material.belongsTo(User, {
+            foreignKey:"userId"
+        })
+    }
 };
 
 module.exports = setUpRelations;

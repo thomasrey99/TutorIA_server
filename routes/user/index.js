@@ -1,14 +1,13 @@
 const { Router } = require('express');
-const { postUserRouter } = require('./userPost.routes');
 const { getUserRouter } = require('./userGet.routes');
 const patchUserRouter = require('./userPatch.routes');
 const deleteUserRouter = require('./userDelete.routes');
+const authenticateToken = require('../../middlewares/authenticateToken');
 
 const userRouter = Router();
 
-userRouter.use('/', postUserRouter);
-userRouter.use('/', getUserRouter);
-userRouter.use('/', patchUserRouter);
-userRouter.use('/', deleteUserRouter);
+userRouter.use('/', authenticateToken, getUserRouter);
+userRouter.use('/',authenticateToken, patchUserRouter);
+userRouter.use('/', authenticateToken,deleteUserRouter);
 
 module.exports = userRouter;

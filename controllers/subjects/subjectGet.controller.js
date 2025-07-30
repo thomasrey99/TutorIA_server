@@ -1,6 +1,6 @@
-const { Subject, StudyMaterial } = require('../../config/database');
+const { Subject, Material } = require('../../config/database');
 
-const getSubjectById = async (userId, subjectId) => {
+const getSubjectById = async ({userId, subjectId}) => {
     if (!subjectId || !userId) throw new Error('userId or subjectId not provided');
     const subject = await Subject.findOne(
         {
@@ -8,7 +8,7 @@ const getSubjectById = async (userId, subjectId) => {
                 id: subjectId,
                 userId
             },
-            include: [StudyMaterial]
+            include: [Material]
         }
     );
     if (!subject) throw new Error('Subject not found or does not belong to this user');

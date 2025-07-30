@@ -1,6 +1,6 @@
 const { Subject } = require('../../config/database');
 
-const createStudyMaterial = async ({ userId, subjectId, data }) => {
+const createMaterial = async ({ userId, subjectId, data }) => {
     if (!subjectId) throw new Error('Subject id not provided');
     if (!data) throw new Error('Data not provided');
     const subject = await Subject.findOne(
@@ -12,10 +12,10 @@ const createStudyMaterial = async ({ userId, subjectId, data }) => {
         }
     );
     if (!subject) throw new Error('Subject not found or does not belong to the user');
-    const newStudyMaterial = subject.createStudyMaterial(data);
-    return newStudyMaterial;
+    const newMaterial = subject.createMaterial(data);
+    return newMaterial;
 }
 
 module.exports = {
-    createStudyMaterial
+    createMaterial
 };

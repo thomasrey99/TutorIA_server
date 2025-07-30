@@ -1,10 +1,9 @@
 const { Router } = require('express');
 const { getUserProfileHandler } = require('../../handlers/user/userGet.handlers');
-const authenticateToken = require('../../middlewares/authenticateToken');
 
 const getUserRouter = Router();
 
-getUserRouter.get('/profile', authenticateToken, getUserProfileHandler);
+getUserRouter.get('/profile', getUserProfileHandler);
 
 module.exports = {
     getUserRouter

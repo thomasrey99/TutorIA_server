@@ -1,4 +1,4 @@
-const { registerUser, loginUser } = require('../../controllers/user/userPost.controllers');
+const { registerUser, loginUser } = require('../../controllers/auth/auth.controllers');
 const buildResponse = require('../../utils/responseBuilder');
 
 const registerUserHandler = async (req, res) => {

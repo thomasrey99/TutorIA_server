@@ -1,16 +1,18 @@
-const { getSubjectById } = require("../../controllers/subjects/subjectGet.controller");
 const buildResponse = require("../../utils/responseBuilder");
 
-const getSubjectByIdHandler = async (req, res) => {
+const getMaterialsBySubjectHandler = async (req, res) => {
     try {
         const { subjectId } = req.params;
         const userId = req.user.id;
-        const subject = await getSubjectById({userId, subjectId});
+        const materials = await getMaterialsBySubject({
+            subjectId,
+            userId
+        });
         return res.status(200).json(
             buildResponse({
                 status: 200,
-                message: 'Subject successfully obtained',
-                data: subject
+                message: 'Materials obtained succesfully',
+                data: materials
             })
         );
     } catch (error) {
@@ -25,5 +27,5 @@ const getSubjectByIdHandler = async (req, res) => {
 };
 
 module.exports = {
-    getSubjectByIdHandler
-}
+    getMaterialsBySubjectHandler
+};
